@@ -1,0 +1,34 @@
+using Application.Common.Models;
+using Domain.Enums;
+using MediatR;
+
+namespace Application.Features.SkillOffers.Queries.GetSkillOffers;
+
+public record GetSkillOffersQuery(
+    Guid? SkillID,
+    Guid? AccountID,
+    bool? IsActive,
+    string? Search,
+    Guid? ViewerAccountID,
+    bool? ViewerHasSkill,
+    bool? RequireBarter,
+    int Page = 1,
+    int PageSize = 20,
+    string? AuthorSearch = null,
+    string? TitleSearch = null,
+    string? EpithetSearch = null,
+    Guid? ExcludeAccountID = null
+) : IRequest<PagedResult<SkillOfferDto>>;
+
+public record SkillOfferDto(
+    Guid OfferID,
+    Guid AccountID,
+    string AuthorName,
+    string? AuthorPhotoURL,
+    Guid SkillID,
+    string SkillName,
+    SkillEpithet SkillEpithet,
+    string Title,
+    string? Details,
+    bool IsActive
+);
